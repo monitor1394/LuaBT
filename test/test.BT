@@ -1,0 +1,77 @@
+{
+    "version": 2.7,
+    "type": "NodeCanvas.BehaviourTrees.BehaviourTree",
+    "nodes": [
+        {
+            "dynamic": true,
+            "random": true,
+            "_position": {
+                "x": 5314.0,
+                "y": 5160.0
+            },
+            "$type": "NodeCanvas.BehaviourTrees.Sequencer",
+            "$id": "2"
+        },
+        {
+            "_condition": {
+                "timeout": {
+                    "_value": 1.0
+                },
+                "$type": "NodeCanvas.Tasks.Conditions.Timeout"
+            },
+            "_position": {
+                "x": 5189.0,
+                "y": 5280.0
+            },
+            "$type": "NodeCanvas.BehaviourTrees.ConditionNode",
+            "$id": "3"
+        },
+        {
+            "_action": {
+                "waitTime": {
+                    "_value": 1.0
+                },
+                "$type": "NodeCanvas.Tasks.Actions.Wait"
+            },
+            "_position": {
+                "x": 5429.0,
+                "y": 5280.0
+            },
+            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
+            "$id": "6"
+        }
+    ],
+    "connections": [
+        {
+            "_sourceNode": {
+                "$ref": "2"
+            },
+            "_targetNode": {
+                "$ref": "3"
+            },
+            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+        },
+        {
+            "_sourceNode": {
+                "$ref": "2"
+            },
+            "_targetNode": {
+                "$ref": "6"
+            },
+            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+        }
+    ],
+    "primeNode": {
+        "$ref": "2"
+    },
+    "localBlackboard": {
+        "_name": "Local Blackboard",
+        "_variables": {
+
+        }
+    },
+    "derivedData": {
+        "repeat": true,
+        "$type": "NodeCanvas.BehaviourTrees.BehaviourTree+DerivedSerializationData"
+    }
+}
