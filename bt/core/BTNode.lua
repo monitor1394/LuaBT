@@ -14,12 +14,23 @@ function BTNode:ctor()
     self.outSize = 0
 end
 
+function BTNode:init(jsonData)
+end
+
 function BTNode:addInConnection(connection)
+    if #self.inConnections >= self.maxInConnections and self.maxInConnections ~= -1 then
+        print("BTNode:addInConnection ERROR:",#self.inConnections)
+        return
+    end
     table.insert( self.inConnections, connection )
     self.inSize = self.inSize + 1
 end
 
 function BTNode:addOutConnection(connection)
+    if #self.outConnections >= self.maxOutConnections and self.maxOutConnections ~= -1 then
+        print("BTNode:addOutConnection ERROR:",#self.outConnections)
+        return
+    end
     table.insert( self.outConnections, connection )
     self.outSize = self.outSize + 1
 end
@@ -30,9 +41,9 @@ function BTNode:execute(agent,blackboard)
         return bt.Status.Failure
     end
     self.isChecked = true
-    self.status = onExecute(agent,blackboard)
+    self.status = self:onExecute(agent,blackboard)
     self.isChecked = false
-    return slef.status
+    return self.status
 end
 
 function BTNode:reset(recursively)

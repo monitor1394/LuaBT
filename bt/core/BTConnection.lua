@@ -2,6 +2,7 @@ local BTConnection = bt.Class("BTConnection")
 bt.BTConnection = BTConnection
 
 function BTConnection:ctor()
+    self.id = 0
     self.name = "BTConnection"
     self.sourceNode = nil
     self.targetNode = nil
@@ -20,20 +21,22 @@ function BTConnection:isActive()
     return not self.isDisabled
 end
 
-function BTConnection:create(source,target)
+function BTConnection:create(id,source,target,isDisabled)
     if source == nil or target == nil then
         print("Can't Create a Connection without providing Source and Target Nodes")
         return nil
     end
+    self.id = id
+    self.isDisabled = isDisabled
     self.sourceNode = source
     self.targetNode = target
 end
 
 function BTConnection:execute(agent,blackboard)
-    if not self.isActive() then
+    if not self:isActive() then
         return bt.Status.Resting
     end
-    self.status = targetNode:execute(agent,blackboard)
+    self.status = self.targetNode:execute(agent,blackboard)
     return self.status
 end
 
@@ -43,6 +46,6 @@ function BTConnection:reset(recursively)
     end
     self.status = bt.Status.Resting
     if recursively then
-        targetNode:reset(recursively)
+        self.targetNode:reset(recursively)
     end
 end

@@ -21,7 +21,9 @@ setmetatableindex = setmetatableindex_
 
 bt =  {
     VERSION = "0.0.1", 
-    deltaTime = 1, 
+    ASSERT_DIR = "C:/work/project/LuaBT/test/",
+    ASSERT_SUFFIX = ".BT",
+    deltaTime = 0.1, 
     frameCount = 0,
     time = 0,
     Status={
@@ -132,7 +134,7 @@ bt =  {
             type = t
         end
         local isCondition, _ = string.find(clspath, "Conditions.")
-        if type == "Timeout"and isCondition then
+        if type == "Timeout" and isCondition then
             type = "C".. type
         end
         if type == "ServerLuaAction" then

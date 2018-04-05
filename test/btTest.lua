@@ -11,4 +11,5 @@ includePath()
 require("btHeader")
 
 local btree = bt.BehaviourTree.new()
-btree:load("C:/work/project/LuaBT/test/test.BT")
+btree:load("test")
+btree:update()
