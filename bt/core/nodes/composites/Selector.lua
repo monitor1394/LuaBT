@@ -1,25 +1,26 @@
+
 -----------------------------------------------------------------------------------------
 -- Composites
--- Sequencer
+-- Selector
 
--- Execute the child nodes in order or randonly and return Success if all children return 
--- Success, else return Failure.
--- If is Dynamic, higher priority child status is revaluated. 
--- If a child returns Failure the Sequencer will bail out immediately in Failure too.
+-- Execute the child nodes in order or randonly until the first that returns Success 
+-- and return Success as well. If none returns Success, then returns Failure.\n
+-- If is Dynamic, then higher priority children Status are revaluated and if one returns 
+-- Success the Selector will select that one and bail out immediately in Success too
 -----------------------------------------------------------------------------------------
 
-local Sequencer = bt.Class("Sequencer",bt.BTComposite)
-bt.Sequencer = Sequencer
+local Selector = bt.Class("Selector",bt.BTComposite)
+bt.Selector = Selector
 
-function Sequencer:ctor()
+function Selector:ctor()
     bt.BTComposite.ctor(self)
-    self.name = "Sequencer"
+    self.name = "Selector"
     self.dynamic = false
     self.random = false
     self.lastRunningNodeIndex = 1
 end
 
-function Sequencer:init(jsonData)
+function Selector:init(jsonData)
     if jsonData.dynamic then
         self.dynamic = jsonData.dynamic
     end
@@ -28,7 +29,7 @@ function Sequencer:init(jsonData)
     end
 end
 
-function Sequencer:onExecute(agent,blackboard)
+function Selector:onExecute(agent,blackboard)
     local startIndex = self.lastRunningNodeIndex
     if self.dynamic then
         startIndex = 1
@@ -42,30 +43,30 @@ function Sequencer:onExecute(agent,blackboard)
             end
             self.lastRunningNodeIndex = i
             return bt.Status.Running
-        elseif self.status == bt.Status.Failure then
+        elseif self.status == bt.Status.Success then
             if self.dynamic and i < self.lastRunningNodeIndex then
                 for j = i + 1,self.lastRunningNodeIndex do 
                     self.outConnections[j]:reset(true)
                 end
             end
-            return bt.Status.Failure
+            return bt.Status.Success
         end
     end
-    return bt.Status.Success
+    return bt.Status.Failure
 end
 
-function Sequencer:onReset()
+function Selector:onReset()
     self.lastRunningNodeIndex = 1
     if self.random then 
         self:shuffle(self.outConnections)
     end
 end
 
-function Sequencer:onGraphStarted()
+function Selector:onGraphStarted()
     self:onReset()
 end
 
-function Sequencer:shuffle(list)
+function Selector:shuffle(list)
     local size = #list
     for i = 1,size do
         local j = math.random( i,size)

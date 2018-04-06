@@ -31,7 +31,7 @@ end
 function BehaviourTree:tick(agent, blackboard)
     if self.rootStatus ~= bt.Status.Running then
         self.tickCount = self.tickCount + 1
-        --print("bt tick:"..self.tickCount.."-------------"..bt.getStatusInfo(self.rootStatus))
+        print("bt tick:"..self.tickCount.."-------------"..bt.getStatusInfo(self.rootStatus))
         self.primeNode:reset()
     end
     self.rootStatus = self.primeNode:execute(agent, blackboard)

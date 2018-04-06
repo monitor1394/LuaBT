@@ -7,6 +7,8 @@ require "core.BTNode"
 
 require "core.nodes.BTComposite"
 require "core.nodes.BTDecorator"
+require "core.nodes.composites.Parallel"
+require "core.nodes.composites.Selector"
 require "core.nodes.composites.Sequencer"
 
 require "core.nodes.leafs.ActionNode"
