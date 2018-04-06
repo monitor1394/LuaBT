@@ -23,7 +23,7 @@ bt =  {
     VERSION = "0.0.1", 
     ASSERT_DIR = "C:/work/project/LuaBT/test/",
     ASSERT_SUFFIX = ".BT",
-    deltaTime = 0.1, 
+    deltaTime = 1, 
     frameCount = 0,
     time = 0,
     Status={
@@ -41,7 +41,7 @@ bt =  {
         elseif status == bt.Status.Resting then return "Resting"
         elseif status == bt.Status.Error then return "Error"
         elseif status == bt.Status.Optional then return "Optional"
-        else return "Unkown" end
+        else return "Unkown:"..status end
     end, 
 
     FinishStatus =  {

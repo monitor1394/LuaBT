@@ -12,7 +12,7 @@ end
 
 function BTConnection:setActive(flag)
     if not self.isDisabled and not flag then
-        self:reset()
+        self:reset(true)
     end
     self.isDisabled = not flag
 end

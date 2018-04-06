@@ -14,7 +14,16 @@ function Wait:ctor()
 end
 
 function Wait:init(jsonData)
-    self:debug(self:getElapsedTime())
+    if jsonData.waitTime then
+        self.waitTime = jsonData.waitTime._value
+    end
+    if jsonData.finishStatus ~= nil then
+        self.finishStatus = CompactStatus[jsonData.finishStatus]
+    end
+end
+
+function Wait:onUpdate()
+    self:debug()
     if self:getElapsedTime() >= self.waitTime then
         if self.finishStatus == CompactStatus.Success then
             self:endAction(true)
@@ -22,4 +31,8 @@ function Wait:init(jsonData)
             self:endAction(false)
         end
     end
+end
+
+function Wait:info()
+    return string.format("Wait %.2f/%.2f",self:getElapsedTime(),self.waitTime)
 end

@@ -16,7 +16,7 @@ function ActionNode:onExecute(agent,blackboard)
     if self.action == nil then
         return bt.Status.Failure
     end
-    if self.status == bt.Status.Resting or bt.status == bt.Status.Running then
+    if self.status == bt.Status.Resting or self.status == bt.Status.Running then
         return self.action:executeAction(agent,blackboard)
     end
     return self.status

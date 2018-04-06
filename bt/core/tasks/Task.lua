@@ -48,8 +48,8 @@ end
 
 function Task:debug(info)
     if info == nil then
-        print(self.name)
+        print(self:info())
     else
-        print(self.name,info)
+        print(self:info(),info)
     end
 end

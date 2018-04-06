@@ -16,10 +16,15 @@ end
 
 function CTimeout:onCheck()
     self.currentTime = self.currentTime + bt.deltaTime
-    self:debug(string.format("%.2f/%.2f",self.currentTime,self.timeout))
+    self:debug()
     if self.currentTime >= self.timeout then
+        self.currentTime = 0
         return true
     else 
         return false
     end
+end
+
+function CTimeout:info()
+    return string.format("If CTimeout %.2f/%.2f",self.currentTime,self.timeout)
 end
