@@ -19,6 +19,7 @@ require "core.tasks.ConditionTask"
 
 require "core.tasks.actions.Wait"
 require "core.tasks.conditions.CTimeout"
+require "core.tasks.conditions.Probability"
 
 
 

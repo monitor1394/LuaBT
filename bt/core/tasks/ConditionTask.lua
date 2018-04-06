@@ -8,6 +8,13 @@ function ConditionTask:ctor()
     self.invert = false
 end
 
+function ConditionTask:init(jsonData)
+    if jsonData._invert then
+        self.invert = jsonData._invert
+    end
+    print("invert:",self.invert)
+end
+
 function ConditionTask:enable(agent,blackboard)
     if self:set(agent,blackboard) then
         self:onEnable()

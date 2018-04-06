@@ -9,6 +9,7 @@ function CTimeout:ctor()
 end
 
 function CTimeout:init(jsonData)
+    bt.ConditionTask:init(jsonData)
     if jsonData.timeout then
         self.timeout = jsonData.timeout._value
     end
