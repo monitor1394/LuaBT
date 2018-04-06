@@ -3,13 +3,19 @@
     "type": "NodeCanvas.BehaviourTrees.BehaviourTree",
     "nodes": [
         {
-            "policy": "FirstSuccess",
-            "dynamic": true,
-            "_position": {
-                "x": 5392.0,
-                "y": 5167.0
+            "enumCase": {
+                "_type": "System.Enum",
+                "_name": "_"
             },
-            "$type": "NodeCanvas.BehaviourTrees.Parallel",
+            "intCase": {
+                "_value": 4
+            },
+            "outOfRangeMode": "LoopIndex",
+            "_position": {
+                "x": 5400.0,
+                "y": 5113.0
+            },
+            "$type": "NodeCanvas.BehaviourTrees.Switch",
             "$id": "2"
         },
         {
@@ -23,11 +29,11 @@
                 "$type": "NodeCanvas.Tasks.Conditions.Probability"
             },
             "_position": {
-                "x": 5197.0,
-                "y": 5281.0
+                "x": 5225.0,
+                "y": 5291.0
             },
             "$type": "NodeCanvas.BehaviourTrees.ConditionNode",
-            "$id": "3"
+            "$id": "5"
         },
         {
             "_action": {
@@ -38,11 +44,25 @@
                 "$type": "NodeCanvas.Tasks.Actions.Wait"
             },
             "_position": {
-                "x": 5486.0,
-                "y": 5283.0
+                "x": 5400.0,
+                "y": 5288.0
             },
             "$type": "NodeCanvas.BehaviourTrees.ActionNode",
-            "$id": "7"
+            "$id": "9"
+        },
+        {
+            "_action": {
+                "waitTime": {
+                    "_value": 2.0
+                },
+                "$type": "NodeCanvas.Tasks.Actions.Wait"
+            },
+            "_position": {
+                "x": 5582.0,
+                "y": 5287.0
+            },
+            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
+            "$id": "12"
         },
         {
             "_condition": {
@@ -52,8 +72,8 @@
                 "$type": "NodeCanvas.Tasks.Conditions.Timeout"
             },
             "_position": {
-                "x": 5635.0,
-                "y": 5154.0
+                "x": 5739.0,
+                "y": 5283.0
             },
             "$type": "NodeCanvas.BehaviourTrees.ConditionNode"
         }
@@ -64,7 +84,7 @@
                 "$ref": "2"
             },
             "_targetNode": {
-                "$ref": "3"
+                "$ref": "5"
             },
             "$type": "NodeCanvas.BehaviourTrees.BTConnection"
         },
@@ -73,7 +93,16 @@
                 "$ref": "2"
             },
             "_targetNode": {
-                "$ref": "7"
+                "$ref": "9"
+            },
+            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+        },
+        {
+            "_sourceNode": {
+                "$ref": "2"
+            },
+            "_targetNode": {
+                "$ref": "12"
             },
             "$type": "NodeCanvas.BehaviourTrees.BTConnection"
         }
