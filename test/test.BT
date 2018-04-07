@@ -3,20 +3,43 @@
     "type": "NodeCanvas.BehaviourTrees.BehaviourTree",
     "nodes": [
         {
-            "enumCase": {
-                "_type": "System.Enum",
-                "_name": "_"
-            },
-            "intCase": {
-                "_value": 4
-            },
-            "outOfRangeMode": "LoopIndex",
             "_position": {
-                "x": 5400.0,
-                "y": 5113.0
+                "x": 5359.0,
+                "y": 5128.0
             },
-            "$type": "NodeCanvas.BehaviourTrees.Switch",
+            "$type": "NodeCanvas.BehaviourTrees.Sequencer",
             "$id": "2"
+        },
+        {
+            "filterMode": "LimitNumberOfTimes",
+            "maxCount": {
+                "_value": 3
+            },
+            "coolDownTime": {
+                "_value": 6.0
+            },
+            "inactiveWhenLimited": true,
+            "policy": "SuccessOnly",
+            "_position": {
+                "x": 5420.0,
+                "y": 5234.0
+            },
+            "$type": "NodeCanvas.BehaviourTrees.Filter",
+            "$id": "3"
+        },
+        {
+            "_action": {
+                "waitTime": {
+                    "_value": 3.0
+                },
+                "$type": "NodeCanvas.Tasks.Actions.Wait"
+            },
+            "_position": {
+                "x": 5440.0,
+                "y": 5358.0
+            },
+            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
+            "$id": "6"
         },
         {
             "_condition": {
@@ -29,53 +52,25 @@
                 "$type": "NodeCanvas.Tasks.Conditions.Probability"
             },
             "_position": {
-                "x": 5225.0,
-                "y": 5291.0
+                "x": 5704.0,
+                "y": 5189.0
             },
-            "$type": "NodeCanvas.BehaviourTrees.ConditionNode",
-            "$id": "5"
+            "$type": "NodeCanvas.BehaviourTrees.ConditionalEvaluator",
+            "$id": "9"
         },
         {
             "_action": {
                 "waitTime": {
                     "_value": 3.0
                 },
-                "finishStatus": "Failure",
                 "$type": "NodeCanvas.Tasks.Actions.Wait"
             },
             "_position": {
-                "x": 5400.0,
-                "y": 5288.0
+                "x": 5696.0,
+                "y": 5296.0
             },
             "$type": "NodeCanvas.BehaviourTrees.ActionNode",
-            "$id": "9"
-        },
-        {
-            "_action": {
-                "waitTime": {
-                    "_value": 2.0
-                },
-                "$type": "NodeCanvas.Tasks.Actions.Wait"
-            },
-            "_position": {
-                "x": 5582.0,
-                "y": 5287.0
-            },
-            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
-            "$id": "12"
-        },
-        {
-            "_condition": {
-                "timeout": {
-                    "_value": 5.0
-                },
-                "$type": "NodeCanvas.Tasks.Conditions.Timeout"
-            },
-            "_position": {
-                "x": 5739.0,
-                "y": 5283.0
-            },
-            "$type": "NodeCanvas.BehaviourTrees.ConditionNode"
+            "$id": "13"
         }
     ],
     "connections": [
@@ -84,25 +79,25 @@
                 "$ref": "2"
             },
             "_targetNode": {
-                "$ref": "5"
+                "$ref": "3"
             },
             "$type": "NodeCanvas.BehaviourTrees.BTConnection"
         },
         {
             "_sourceNode": {
-                "$ref": "2"
+                "$ref": "3"
             },
             "_targetNode": {
+                "$ref": "6"
+            },
+            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+        },
+        {
+            "_sourceNode": {
                 "$ref": "9"
             },
-            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
-        },
-        {
-            "_sourceNode": {
-                "$ref": "2"
-            },
             "_targetNode": {
-                "$ref": "12"
+                "$ref": "13"
             },
             "$type": "NodeCanvas.BehaviourTrees.BTConnection"
         }

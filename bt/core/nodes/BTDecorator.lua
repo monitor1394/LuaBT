@@ -8,9 +8,9 @@ function BTDecorator:ctor()
 end
 
 function BTDecorator:getDecoratedConnection()
-    return outConnection[1]
+    return self.outConnections[1]
 end
 
 function BTDecorator:getDecoratedNode()
-    return outConnection[1].targetNode
+    return self.outConnections[1].targetNode
 end

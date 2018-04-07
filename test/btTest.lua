@@ -17,6 +17,8 @@ btree:load("test")
 
 local function updateBT()
     bt.time = bt.time + bt.deltaTime
+    bt.runLoopFunc()
     btree:update()
 end
+
 xd.addTimer(0,bt.deltaTime * 1000,updateBT)

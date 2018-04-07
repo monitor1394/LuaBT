@@ -17,6 +17,9 @@ require "core.nodes.composites.Sequencer"
 require "core.nodes.composites.StepIterator"
 require "core.nodes.composites.Switch"
 
+require "core.nodes.decorators.ConditionalEvaluator"
+require "core.nodes.decorators.Filter"
+
 require "core.nodes.leafs.ActionNode"
 require "core.nodes.leafs.ConditionNode"
 

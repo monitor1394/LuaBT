@@ -6,6 +6,8 @@ function CTimeout:ctor()
     self.name = "CTimeout"
     self.timeout = 1
     self.currentTime = 0
+
+    self.timeoutFuncId = 0
 end
 
 function CTimeout:init(jsonData)
@@ -16,13 +18,23 @@ function CTimeout:init(jsonData)
 end
 
 function CTimeout:onCheck()
-    self.currentTime = self.currentTime + bt.deltaTime
-    self:debug()
-    if self.currentTime >= self.timeout then
+    if self.timeoutFuncId <= 0 then
         self.currentTime = 0
+        self.timeoutFuncId = bt.addLoopFunc(self.checkTimeout,self)
+    end
+    if self.currentTime >= self.timeout then
+        bt.delLoopFunc(self.timeoutFuncId)
+        self.timeoutFuncId = 0
         return true
     else 
         return false
+    end
+end
+
+function CTimeout:checkTimeout()
+    if self.timeoutFuncId > 0 then
+        self.currentTime = self.currentTime + bt.deltaTime
+        self:debug()
     end
 end
 

@@ -20,40 +20,30 @@ end
 setmetatableindex = setmetatableindex_
 
 bt =  {
-    VERSION = "0.0.1", 
-    ASSERT_DIR = "C:/work/project/LuaBT/test/",
-    ASSERT_SUFFIX = ".BT",
-    deltaTime = 1, 
-    frameCount = 0,
-    time = 0,
-    Status={
-        Failure = 0,
-        Success = 1, 
-        Running = 2, 
-        Resting = 3, 
-        Error = 4, 
-        Optional = 5
+    VERSION         = "0.0.1", 
+    ASSERT_DIR      = "C:/work/project/LuaBT/test/",
+    ASSERT_SUFFIX   = ".BT",
+    deltaTime       = 1, 
+    frameCount      = 0,
+    time            = 0,
+    Status = {
+        Failure     = 0,
+        Success     = 1, 
+        Running     = 2, 
+        Resting     = 3, 
+        Error       = 4, 
+        Optional    = 5
     }, 
     getStatusInfo = function (status)
-        if status == bt.Status.Failure then return "Failure"
+        if     status == bt.Status.Failure then return "Failure"
         elseif status == bt.Status.Success then return "Success"
         elseif status == bt.Status.Running then return "Running"
         elseif status == bt.Status.Resting then return "Resting"
-        elseif status == bt.Status.Error then return "Error"
+        elseif status == bt.Status.Error   then return "Error"
         elseif status == bt.Status.Optional then return "Optional"
         else return "Unkown:"..status end
     end, 
 
-    FinishStatus =  {
-        Failure = 0, 
-        Success = 1
-    }, 
-
-    ParallelPolicy =  {
-        FirstFailure = 0, 
-        FirstSuccess = 1, 
-        FirstSuccessOrFailure = 2
-    }, 
     Class = function (classname, ...)
         local cls =  {__cname = classname}
         local supers =  {...}
@@ -149,5 +139,39 @@ bt =  {
             print("ERROR:bt.getCls:invalid class,fullpath=".. clspath .. ",subpath="..type)
         end
         return Cls
-    end
+    end,
+
+    loopFunc = {},
+    loopFuncParams = {},
+    loopFuncIndex = 1,
+
+    addLoopFunc = function (func,param)
+        local id = bt.loopFuncIndex
+        bt.loopFunc[id] = func
+        if param ~= nil then
+            bt.loopFuncParams[id] = param
+        end
+        bt.loopFuncIndex =  bt.loopFuncIndex + 1
+        return id
+    end,
+
+    delLoopFunc = function (id)
+        if bt.loopFunc[id] ~= nil then
+            bt.loopFunc[id] = nil
+            bt.loopFuncParams[id] = nil
+        end
+        if bt.loopFuncParams[id] ~= nil then
+            bt.loopFuncParams[id] = nil
+        end
+    end,
+
+    runLoopFunc = function()
+        for k,func in pairs(bt.loopFunc) do
+            if bt.loopFuncParams[k] ~= nil then
+                func(bt.loopFuncParams[k])
+            else 
+                func()
+            end
+        end
+    end,
 }

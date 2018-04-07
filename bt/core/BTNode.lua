@@ -79,5 +79,17 @@ end
 function BTNode:onGraphUnpaused()
 end
 
+function BTNode:info()
+    return self.name
+end
+
+function BTNode:debug(info)
+    if info == nil then
+        print(self:info())
+    else
+        print(self:info(),info)
+    end
+end
+
 
 
