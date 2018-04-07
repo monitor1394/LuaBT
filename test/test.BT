@@ -11,6 +11,32 @@
             "$id": "2"
         },
         {
+            "token": {
+                "_value": "abc"
+            },
+            "ifGuarded": "WaitUntilReleased",
+            "_position": {
+                "x": 5131.0,
+                "y": 5242.0
+            },
+            "$type": "NodeCanvas.BehaviourTrees.Guard",
+            "$id": "3"
+        },
+        {
+            "_action": {
+                "waitTime": {
+                    "_value": 3.0
+                },
+                "$type": "NodeCanvas.Tasks.Actions.Wait"
+            },
+            "_position": {
+                "x": 5129.0,
+                "y": 5342.0
+            },
+            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
+            "$id": "5"
+        },
+        {
             "_condition": {
                 "timeout": {
                     "_value": 20.0
@@ -18,11 +44,11 @@
                 "$type": "NodeCanvas.Tasks.Conditions.Timeout"
             },
             "_position": {
-                "x": 5260.0,
-                "y": 5237.0
+                "x": 5449.0,
+                "y": 5253.0
             },
             "$type": "NodeCanvas.BehaviourTrees.ConditionNode",
-            "$id": "3"
+            "$id": "8"
         },
         {
             "filterMode": "LimitNumberOfTimes",
@@ -35,11 +61,11 @@
             "inactiveWhenLimited": false,
             "policy": "SuccessOnly",
             "_position": {
-                "x": 5420.0,
-                "y": 5234.0
+                "x": 5676.0,
+                "y": 5265.0
             },
             "$type": "NodeCanvas.BehaviourTrees.Filter",
-            "$id": "6"
+            "$id": "11"
         },
         {
             "_action": {
@@ -49,11 +75,11 @@
                 "$type": "NodeCanvas.Tasks.Actions.Wait"
             },
             "_position": {
-                "x": 5440.0,
-                "y": 5358.0
+                "x": 5720.0,
+                "y": 5390.0
             },
             "$type": "NodeCanvas.BehaviourTrees.ActionNode",
-            "$id": "9"
+            "$id": "14"
         },
         {
             "_condition": {
@@ -69,22 +95,7 @@
                 "x": 5704.0,
                 "y": 5189.0
             },
-            "$type": "NodeCanvas.BehaviourTrees.ConditionalEvaluator",
-            "$id": "12"
-        },
-        {
-            "_action": {
-                "waitTime": {
-                    "_value": 3.0
-                },
-                "$type": "NodeCanvas.Tasks.Actions.Wait"
-            },
-            "_position": {
-                "x": 5696.0,
-                "y": 5296.0
-            },
-            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
-            "$id": "16"
+            "$type": "NodeCanvas.BehaviourTrees.ConditionalEvaluator"
         }
     ],
     "connections": [
@@ -99,19 +110,28 @@
         },
         {
             "_sourceNode": {
-                "$ref": "6"
+                "$ref": "2"
             },
             "_targetNode": {
-                "$ref": "9"
+                "$ref": "8"
             },
             "$type": "NodeCanvas.BehaviourTrees.BTConnection"
         },
         {
             "_sourceNode": {
-                "$ref": "12"
+                "$ref": "3"
             },
             "_targetNode": {
-                "$ref": "16"
+                "$ref": "5"
+            },
+            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+        },
+        {
+            "_sourceNode": {
+                "$ref": "11"
+            },
+            "_targetNode": {
+                "$ref": "14"
             },
             "$type": "NodeCanvas.BehaviourTrees.BTConnection"
         }

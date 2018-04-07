@@ -19,6 +19,7 @@ require "core.nodes.composites.Switch"
 
 require "core.nodes.decorators.ConditionalEvaluator"
 require "core.nodes.decorators.Filter"
+require "core.nodes.decorators.Guard"
 
 require "core.nodes.leafs.ActionNode"
 require "core.nodes.leafs.ConditionNode"

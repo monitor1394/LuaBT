@@ -9,7 +9,7 @@ function BehaviourTree:ctor()
     self.nodes =  {}
     self.nodesIndex = {}
     self.rootStatus = bt.Status.Resting
-    self.agent = nil
+    self.agent = {id = 1001}
     self.blackboard = nil
     self.isRunning = false
     self.isPaused = false

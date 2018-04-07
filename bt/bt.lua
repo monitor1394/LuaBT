@@ -34,6 +34,7 @@ bt =  {
         Error       = 4, 
         Optional    = 5
     }, 
+    guards = {},
     getStatusInfo = function (status)
         if     status == bt.Status.Failure then return "Failure"
         elseif status == bt.Status.Success then return "Success"
