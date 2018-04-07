@@ -18,7 +18,15 @@ btree:load("test")
 local function updateBT()
     bt.time = bt.time + bt.deltaTime
     bt.runLoopFunc()
-    btree:update()
+    if btree then
+        btree:update()
+    end
+    if bt.time > 20 then
+        if btree then
+            btree:destroy()
+            btree = nil
+        end
+    end
 end
 
 xd.addTimer(0,bt.deltaTime * 1000,updateBT)

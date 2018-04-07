@@ -33,3 +33,10 @@ function ActionNode:onGraphPaused()
         self.action:pauseAction()
     end
 end
+
+function ActionNode:destroy()
+    if self.action ~= nil then
+        self.action:destroy()
+        self.action = nil
+    end
+end

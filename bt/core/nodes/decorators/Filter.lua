@@ -109,3 +109,9 @@ function Filter:coolDown()
         end
     end
 end
+
+function Filter:destroy()
+    if self.cooldownFuncId > 0 then
+        bt.delLoopFunc(self.cooldownFuncId)
+    end
+end

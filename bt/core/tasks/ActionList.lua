@@ -59,7 +59,7 @@ function ActionList:onUpdate()
             self:endAction(true)
         end
     else
-        for i=self.currentActionIndex,#self.actions,1 do
+        for i = self.currentActionIndex,#self.actions do
             local action = self.actions[i]
             if action.isActive then
                 local status = action:executeAction(self.agent,self.blackboard)
@@ -95,5 +95,15 @@ end
 function ActionList:onPause()
     for k,action in pairs(self.actions) do
         action:pauseAction()
+    end
+end
+
+function ActionList:destroy()
+    self.finishedIndeces = nil
+    for k,action in pairs(self.actions) do
+        if action ~= nil then
+            action:destroy()
+            action = nil
+        end
     end
 end

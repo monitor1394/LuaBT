@@ -53,3 +53,7 @@ function Task:debug(info)
         print(self:info(),info)
     end
 end
+
+function Task:destroy()
+end
+

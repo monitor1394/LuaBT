@@ -46,3 +46,10 @@ function BinarySelector:onExecute(agent,blackboard)
     end
     return self.outConnections[self.succeedIndex]:execute(agent,blackboard)
 end
+
+function BinarySelector:destroy()
+    if self.condition ~= nil then
+        self.condition:destroy()
+        self.condition = nil
+    end
+end

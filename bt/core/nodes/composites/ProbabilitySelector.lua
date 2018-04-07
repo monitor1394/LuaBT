@@ -84,3 +84,9 @@ function ProbabilitySelector:isContainInFailedIndeces(i)
     end
     return false
 end
+
+function ProbabilitySelector:destroy()
+    self.childWeights = nil
+    self.failChance = nil
+    self.failedIndeces = nil
+end

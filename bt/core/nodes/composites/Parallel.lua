@@ -100,3 +100,7 @@ function Parallel:resetRunning()
         end
     end
 end
+
+function Parallel:destroy()
+    self.finishedConnections = nil
+end

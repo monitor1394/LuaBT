@@ -41,3 +41,9 @@ end
 function CTimeout:info()
     return string.format("If CTimeout %.2f/%.2f",self.currentTime,self.timeout)
 end
+
+function CTimeout:destroy()
+    if self.timeoutFuncId > 0 then
+        bt.delLoopFunc(self.timeoutFuncId)
+    end
+end

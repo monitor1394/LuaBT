@@ -91,5 +91,8 @@ function BTNode:debug(info)
     end
 end
 
+function BTNode:destroy()
+end
+
 
 

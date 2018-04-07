@@ -60,3 +60,11 @@ end
 function ConditionalEvaluator:onReset()
     self.accessed = false
 end
+
+
+function ConditionalEvaluator:destroy()
+    if self.condition ~= nil then
+        self.condition:destroy()
+        self.condition = nil
+    end
+end

@@ -56,9 +56,18 @@ function BehaviourTree:pause()
     end
     self.isRunning = false
     self.isPaused = true
-    for k, node in pairs(self.nodes)do
+    for k, node in pairs(self.nodes) do
         node:onGraphPaused()
     end
+end
+
+function BehaviourTree:destroy()
+    for k, node in pairs(self.nodes) do
+        node:destroy()
+        node = nil
+    end
+    self.nodes = nil
+    self.nodesIndex = nil
 end
 
 function BehaviourTree:load(fileName)

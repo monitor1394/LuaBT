@@ -15,7 +15,6 @@ function PrioritySelector:ctor()
     bt.BTComposite.ctor(self)
     self.name = "PrioritySelector"
     self.priorities = {}
-    self.orderedConnections = {}
     self.current = 1
 end
 
@@ -48,4 +47,8 @@ end
 
 function PrioritySelector:onReset()
     self.current = 1
+end
+
+function PrioritySelector:destroy()
+    self.priorities = nil
 end

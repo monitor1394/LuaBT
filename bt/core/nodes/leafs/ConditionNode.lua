@@ -22,3 +22,10 @@ function ConditionNode:onExecute(agent,blackbloard)
         end
     end
 end
+
+function ConditionNode:destroy()
+    if self.condition ~= nil then
+        self.condition:destroy()
+        self.condition = nil
+    end
+end
