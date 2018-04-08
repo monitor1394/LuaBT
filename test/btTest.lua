@@ -23,8 +23,8 @@ local function updateBT()
     end
     if bt.time > 20 then
         if btree then
-            btree:destroy()
-            btree = nil
+            --btree:destroy()
+            --btree = nil
         end
     end
 end
