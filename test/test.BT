@@ -11,21 +11,23 @@
             "$id": "2"
         },
         {
-            "repeatUntilStatus": "Failure",
-            "repeatTimes": {
-                "_value": 5
+            "_condition": {
+                "timeout": {
+                    "_value": 10.0
+                },
+                "$type": "NodeCanvas.Tasks.Conditions.Timeout"
             },
             "_position": {
-                "x": 5370.0,
-                "y": 5219.0
+                "x": 5355.0,
+                "y": 5228.0
             },
-            "$type": "NodeCanvas.BehaviourTrees.Repeater",
+            "$type": "NodeCanvas.BehaviourTrees.WaitUntil",
             "$id": "3"
         },
         {
             "_action": {
                 "waitTime": {
-                    "_value": 3.0
+                    "_value": 4.0
                 },
                 "$type": "NodeCanvas.Tasks.Actions.Wait"
             },
@@ -34,7 +36,7 @@
                 "y": 5364.0
             },
             "$type": "NodeCanvas.BehaviourTrees.ActionNode",
-            "$id": "5"
+            "$id": "6"
         }
     ],
     "connections": [
@@ -52,7 +54,7 @@
                 "$ref": "3"
             },
             "_targetNode": {
-                "$ref": "5"
+                "$ref": "6"
             },
             "$type": "NodeCanvas.BehaviourTrees.BTConnection"
         }
