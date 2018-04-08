@@ -34,5 +34,5 @@ function Wait:onUpdate()
 end
 
 function Wait:info()
-    return string.format("Wait %.2f/%.2f",self:getElapsedTime(),self.waitTime)
+    return string.format("Wait %.2f/%.2f sec.",self:getElapsedTime(),self.waitTime)
 end

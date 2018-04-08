@@ -87,7 +87,7 @@ function BTNode:debug(info)
     if info == nil then
         print(self:info())
     else
-        print(self:info(),info)
+        print(self:info().." "..info)
     end
 end
 

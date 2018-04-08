@@ -39,7 +39,7 @@ function CTimeout:checkTimeout()
 end
 
 function CTimeout:info()
-    return string.format("If CTimeout %.2f/%.2f",self.currentTime,self.timeout)
+    return string.format("If CTimeout %.2f/%.2f sec.",self.currentTime,self.timeout)
 end
 
 function CTimeout:destroy()
