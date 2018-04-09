@@ -42,3 +42,11 @@ end
 function ConditionTask:onCheck()
     return true
 end
+
+function ConditionTask:info()
+    if self.invert then
+        return "If !" .. self.name
+    else
+        return "If " .. self.name
+    end
+end

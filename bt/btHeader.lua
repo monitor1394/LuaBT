@@ -1,9 +1,9 @@
 
 require 'bt'
 
-require "core.BehaviourTree"
-require "core.BTConnection"
 require "core.BTNode"
+require "core.BTConnection"
+require "core.BehaviourTree"
 
 require "core.nodes.BTComposite"
 require "core.nodes.BTDecorator"
@@ -30,15 +30,17 @@ require "core.nodes.decorators.Setter"
 require "core.nodes.decorators.Timeout"
 require "core.nodes.decorators.WaitUntil"
 
+require "core.tasks.Task"
+require "core.tasks.ActionTask"
+require "core.tasks.ActionList"
+require "core.tasks.ConditionTask"
+require "core.tasks.ConditionList"
+
 require "core.nodes.leafs.ActionNode"
 require "core.nodes.leafs.ConditionNode"
 
-require "core.tasks.Task"
-require "core.tasks.ActionList"
-require "core.tasks.ActionTask"
-require "core.tasks.ConditionTask"
-
 require "core.tasks.actions.Wait"
+
 require "core.tasks.conditions.CTimeout"
 require "core.tasks.conditions.Probability"
 

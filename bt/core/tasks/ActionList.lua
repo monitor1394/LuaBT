@@ -6,6 +6,7 @@ ActionsExecutionMode = {
     ActionsRunInSequence = 0,
     ActionsRunInParallel = 1,
 }
+
 function ActionList:ctor()
     bt.ActionTask.ctor(self)
     self.name = "ActionList"
@@ -13,6 +14,20 @@ function ActionList:ctor()
     self.executionMode = ActionsExecutionMode.ActionsRunInSequence
     self.currentActionIndex = 1
     self.finishedIndeces = {}
+end
+
+function ActionList:init(jsonData)
+    if jsonData.executionMode ~= nil then
+        self.executionMode = ActionsExecutionMode[jsonData.executionMode]
+    end
+    local size = #jsonData.actions
+    for i=1,size do
+        local jsonData2 = jsonData.actions[i]
+        Cls = bt.getCls(jsonData2["$type"], jsonData2)
+        local action = Cls.new()
+        action:init(jsonData2)
+        table.insert(self.actions, action)
+    end
 end
 
 function ActionList:info()
