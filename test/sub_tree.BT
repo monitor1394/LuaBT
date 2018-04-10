@@ -4,39 +4,53 @@
     "nodes": [
         {
             "_position": {
-                "x": 5359.0,
-                "y": 5128.0
+                "x": 5459.0,
+                "y": 5131.0
             },
             "$type": "NodeCanvas.BehaviourTrees.Sequencer",
             "$id": "2"
         },
         {
-            "_condition": {
-                "timeout": {
+            "_action": {
+                "waitTime": {
                     "_value": 1.0
                 },
-                "$type": "NodeCanvas.Tasks.Conditions.Timeout"
+                "$type": "NodeCanvas.Tasks.Actions.Wait"
             },
             "_position": {
-                "x": 5262.0,
-                "y": 5229.0
+                "x": 5296.0,
+                "y": 5217.0
             },
-            "$type": "NodeCanvas.BehaviourTrees.ConditionNode",
+            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
             "$id": "3"
+        },
+        {
+            "_action": {
+                "waitTime": {
+                    "_value": 2.0
+                },
+                "$type": "NodeCanvas.Tasks.Actions.Wait"
+            },
+            "_position": {
+                "x": 5479.0,
+                "y": 5220.0
+            },
+            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
+            "$id": "6"
         },
         {
             "_subTree": {
                 "_value": 1
             },
             "_subTreeName": {
-                "_value": "sub_tree"
+                "_value": "sub_tree2"
             },
             "_position": {
-                "x": 5485.0,
-                "y": 5219.0
+                "x": 5642.0,
+                "y": 5210.0
             },
             "$type": "NodeCanvas.BehaviourTrees.SubTree",
-            "$id": "6"
+            "$id": "9"
         }
     ],
     "connections": [
@@ -55,6 +69,15 @@
             },
             "_targetNode": {
                 "$ref": "6"
+            },
+            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+        },
+        {
+            "_sourceNode": {
+                "$ref": "2"
+            },
+            "_targetNode": {
+                "$ref": "9"
             },
             "$type": "NodeCanvas.BehaviourTrees.BTConnection"
         }

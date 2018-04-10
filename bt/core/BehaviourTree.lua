@@ -8,6 +8,7 @@ function BehaviourTree:ctor()
     self.primeNode = nil
     self.nodes =  {}
     self.nodesIndex = {}
+    self.subTrees = {}
     self.rootStatus = bt.Status.Resting
     self.agent = {id = 1001}
     self.blackboard = nil
@@ -119,9 +120,9 @@ function BehaviourTree:load(fileName)
             --subtree
             if node.isSubTreeNode then
                 local subTreeId = spec._subTree._value
-                local subTreePath = spec._subTreePath._value
-                if subTreeId ~= nil and subTreePath ~= nil then
-                    node.subTree = self:createSubTree(i, subTreePath)
+                local subTreeName = spec._subTreeName._value
+                if subTreeId ~= nil and subTreeName ~= nil then
+                    node.subTree = self:createSubTree(i, subTreeName)
                 end
             end
             self.nodes[id] = node
@@ -148,4 +149,14 @@ function BehaviourTree:load(fileName)
     --primeNode
     local primeNodeId = tonumber(data["primeNode"]["$ref"])
     self.primeNode = self.nodes[primeNodeId]
+end
+
+function BehaviourTree:createSubTree(id,name)
+    local btree = bt.BehaviourTree.new()
+    btree.id = id
+    btree.agent = self.agent
+    btree.blackboard = self.blackboard
+    btree:load(name)
+    self.subTrees[id] = btree
+    return btree
 end

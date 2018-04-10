@@ -38,6 +38,7 @@ require "core.tasks.ConditionList"
 
 require "core.nodes.leafs.ActionNode"
 require "core.nodes.leafs.ConditionNode"
+require "core.nodes.leafs.SubTree"
 
 require "core.tasks.actions.Wait"
 

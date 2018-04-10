@@ -4,38 +4,38 @@
     "nodes": [
         {
             "_position": {
-                "x": 5359.0,
-                "y": 5128.0
+                "x": 5438.0,
+                "y": 5160.0
             },
             "$type": "NodeCanvas.BehaviourTrees.Sequencer",
             "$id": "2"
         },
         {
-            "_condition": {
-                "timeout": {
-                    "_value": 1.0
+            "_action": {
+                "waitTime": {
+                    "_value": 3.0
                 },
-                "$type": "NodeCanvas.Tasks.Conditions.Timeout"
+                "$type": "NodeCanvas.Tasks.Actions.Wait"
             },
             "_position": {
-                "x": 5262.0,
-                "y": 5229.0
+                "x": 5360.0,
+                "y": 5273.0
             },
-            "$type": "NodeCanvas.BehaviourTrees.ConditionNode",
+            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
             "$id": "3"
         },
         {
-            "_subTree": {
-                "_value": 1
-            },
-            "_subTreeName": {
-                "_value": "sub_tree"
+            "_action": {
+                "waitTime": {
+                    "_value": 4.0
+                },
+                "$type": "NodeCanvas.Tasks.Actions.Wait"
             },
             "_position": {
-                "x": 5485.0,
-                "y": 5219.0
+                "x": 5546.0,
+                "y": 5272.0
             },
-            "$type": "NodeCanvas.BehaviourTrees.SubTree",
+            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
             "$id": "6"
         }
     ],
