@@ -10,5 +10,5 @@
 * 支持`NodeCanvas`所有的9种`Composites`节点（`Switch`节点只支持`IndexBased`模式）
 * 支持`NodeCanvas`所有的10种`Decorator`节点
 * 支持一个节点多`Task`（`ActionList`和`ConditionList`）
-* 支持扩展自定义`Task`（开发中）
-* 支持`Unity`编辑时下拉列表选择自定义`Task`（开发中）
+* 支持扩展自定义`Task`
+* 支持`Unity`编辑时下拉列表选择自定义`Task`
