@@ -1,6 +1,7 @@
 local function includePath()
     local paths = {
         "C:/work/project/LuaBT/bt/?.lua",
+        "C:/work/project/LuaBT/test/ai/?.lua",
         "C:/work/project/XGame/XCommon/lua/?.lua",
     }
     for k,path in pairs(paths) do
@@ -10,6 +11,7 @@ end
 
 includePath()
 require("btHeader")
+require("aiHeader")
 require("lib.driver")
 
 local btree = bt.BehaviourTree.new()

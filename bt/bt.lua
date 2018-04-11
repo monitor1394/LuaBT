@@ -128,11 +128,11 @@ bt =  {
         if type == "Timeout" and isCondition then
             type = "C".. type
         end
-        if type == "ServerLuaAction" then
-            type = spec._action.strLuaCls._value
+        if type == "LuaAction" then
+            type = spec._action.luaCls._value
         end
-        if type == "ServerLuaCondition" then
-            type = spec._condition.strLuaCls._value
+        if type == "LuaCondition" then
+            type = spec._condition.luaCls._value
         end
         if bt[type] then
             Cls = bt[type]
