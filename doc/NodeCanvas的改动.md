@@ -107,3 +107,6 @@ public static string[] GetFileList(bool isAction)
     return fileList.ToArray();
 }
 ```
+
+#### 四：增加用于调试操作的`BTDebugEditor`类
+#### 五：增加用于与服务端调试交互的`BTDebug`类

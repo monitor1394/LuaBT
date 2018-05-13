@@ -12,6 +12,7 @@ end
 includePath()
 require("btHeader")
 require("aiHeader")
+require("aiMgr")
 require("lib.driver")
 
 local btree = bt.BehaviourTree.new()
