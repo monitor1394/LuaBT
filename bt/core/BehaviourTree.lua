@@ -11,6 +11,7 @@ function BehaviourTree:ctor()
     self.subTrees = {}
     self.rootStatus = bt.Status.Resting
     self.agent = {id = 1001}
+    self.agent.isBTDebug = false
     self.blackboard = nil
     self.isRunning = false
     self.isPaused = false
@@ -19,10 +20,12 @@ function BehaviourTree:ctor()
 end
 
 function BehaviourTree:start()
+    self.isRunning = true
     self.rootStatus = self.primeNode.status
 end
 
 function BehaviourTree:update()
+    if not self.isRunning then return end
     if self:tick(self.agent, self.blackboard) ~= bt.Status.Running and 
         not self.isRepeat then
         self.stop(self.rootStatus == bt.Status.Success)
@@ -32,7 +35,7 @@ end
 function BehaviourTree:tick(agent, blackboard)
     if self.rootStatus ~= bt.Status.Running then
         self.tickCount = self.tickCount + 1
-        print("bt tick:"..self.tickCount.."-------------"..bt.getStatusInfo(self.rootStatus))
+        self:debug("bt tick:"..self.tickCount.."-------------"..bt.getStatusInfo(self.rootStatus))
         self.primeNode:reset()
     end
     self.rootStatus = self.primeNode:execute(agent, blackboard)
@@ -159,4 +162,9 @@ function BehaviourTree:createSubTree(id,name)
     btree:load(name)
     self.subTrees[id] = btree
     return btree
+end
+
+function BehaviourTree:debug(info)
+    if not self.agent.isBTDebug then return end
+    print(info)
 end

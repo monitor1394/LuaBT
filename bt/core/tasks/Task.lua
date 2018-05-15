@@ -47,6 +47,7 @@ function Task:onInit()
 end
 
 function Task:debug(info)
+    if not self.agent.isBTDebug then return end
     if info == nil then
         print(self:info())
     else
