@@ -110,3 +110,75 @@ public static string[] GetFileList(bool isAction)
 
 #### 四：增加用于调试操作的`BTDebugEditor`类
 #### 五：增加用于与服务端调试交互的`BTDebug`类
+#### 六：`Graphs`类增加`isRunOnServer`变量
+```csharp
+// Is run on game server
+public bool isRunOnServer
+{
+    get { return _isRunOnServer; }
+    set { _isRunOnServer = value; }
+}
+```
+#### 七：`EDITOR_Graph.cs`文件中的`currentChildGraph`接口增加`isRunOnServer`判断
+```csharp
+//responsible for the breacrumb navigation
+public Graph currentChildGraph{
+    get {return _currentChildGraph;}
+    set
+    {
+        if (Application.isPlaying && value != null && EditorUtility.IsPersistent(value)
+            && !isRunOnServer){ //new add
+            ParadoxNotion.Services.Logger.LogWarning("You can't view sub-graphs in play mode until they are initialized to avoid editing asset references accidentally", "Editor", this);
+            return;
+        }
+
+        Undo.RecordObject(this, "Change View");
+        if (value != null){
+            value.currentChildGraph = null;
+        }
+        _currentChildGraph = value;
+    }
+}
+```
+#### 八：`Editor_Node.cs`文件中在点击子树操作时同步给服务端，记录正在浏览的行为树
+```csharp
+//Double click
+if (e.button == 0 && e.clickCount == 2){
+    if (this is IGraphAssignable && (this as IGraphAssignable).nestedGraph != null ){
+        graph.currentChildGraph = (this as IGraphAssignable).nestedGraph;
+        nodeIsPressed = false;
+        BTDebug.SyncSubTree((this as SubTree).ID);//new add
+    } else if (this is ITaskAssignable && (this as ITaskAssignable).task != null){
+        EditorUtils.OpenScriptOfType((this as ITaskAssignable).task.GetType());
+    } else {
+        EditorUtils.OpenScriptOfType(this.GetType());
+    }
+    e.Use();
+}
+```
+#### 九：`GraphEditor.cs`文件中在点击返回按钮返回母树操作时同步给服务端
+```csharp
+//"button" implemented this way due to e.used. It's a weird matter..
+GUILayout.Label("⤴ " + root.name, (GUIStyle)"button");
+if (Event.current.type == EventType.MouseUp && GUILayoutUtility.GetLastRect().Contains(Event.current.mousePosition)){
+    root.currentChildGraph = null;
+    BTDebug.SyncSubTree(0); //new add
+}
+```
+
+#### 十：`BehaviourTree`类的`OnGraphUpdate()`方法中增加`isRunOnServer`判断
+```csharp
+protected override void OnGraphUpdate(){
+    if (isRunOnServer) return; //new add
+    if (intervalCounter >= updateInterval){
+        intervalCounter = 0;
+        if ( Tick(agent, blackboard) != Status.Running && !repeat){
+            Stop( rootStatus == Status.Success );
+        }
+    }
+
+    if (updateInterval > 0){
+        intervalCounter += Time.deltaTime;
+    }
+}
+```

@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections;
 using XLua;
+using NodeCanvas.Framework;
 
 public class BTDebug
 {
@@ -9,6 +10,7 @@ public class BTDebug
     private static LuaFunction funcBTStart;
     private static LuaFunction funcBTPause;
     private static LuaFunction funcBTStop;
+    private static LuaFunction funcBTSubTree;
 
     public static void Init(LuaEnv luaenv)
     {
@@ -17,6 +19,7 @@ public class BTDebug
         funcBTStart = luaenv.Global.Get<LuaFunction>("btStart");
         funcBTPause = luaenv.Global.Get<LuaFunction>("btPuase");
         funcBTStop = luaenv.Global.Get<LuaFunction>("btStop");
+        funcBTSubTree = luaenv.Global.Get<LuaFunction>("btSubTree");
     }
 
     public static void SyncStartDebug(long id)
@@ -56,6 +59,15 @@ public class BTDebug
         if (funcBTStop != null)
         {
             funcBTStop.Call(id);
+        }
+    }
+
+    public static void SyncSubTree(Graph graph,long subTreeId)
+    {
+        if (funcBTSubTree != null)
+        {
+            long id = 1;
+            funcBTSubTree.Call(id,subTreeId);
         }
     }
 }
