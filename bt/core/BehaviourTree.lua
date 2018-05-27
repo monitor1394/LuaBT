@@ -9,6 +9,7 @@ function BehaviourTree:ctor()
     self.nodes =  {}
     self.nodesIndex = {}
     self.subTrees = {}
+    self.debugList = {}
     self.rootStatus = bt.Status.Resting
     self.agent = {id = 1001}
     self.agent.isBTDebug = false
@@ -36,6 +37,7 @@ function BehaviourTree:tick(agent, blackboard)
     if self.rootStatus ~= bt.Status.Running then
         self.tickCount = self.tickCount + 1
         self:debug("bt tick:"..self.tickCount.."-------------"..bt.getStatusInfo(self.rootStatus))
+        print("info:"..self:getNodeInfo())
         self.primeNode:reset()
     end
     self.rootStatus = self.primeNode:execute(agent, blackboard)
@@ -48,7 +50,7 @@ function BehaviourTree:stop(success)
     end
     self.isRunning = false
     self.isPaused = false
-    for k, node in pairs(self.nodes)do
+    for k, node in pairs(self.nodes) do
         node:reset(false)
         node:onGraphStoped()
     end
@@ -72,6 +74,25 @@ function BehaviourTree:destroy()
     end
     self.nodes = nil
     self.nodesIndex = nil
+end
+
+function BehaviourTree:getNodeInfo()
+    local info = "{"
+    for k,nodeId in pairs(self.nodesIndex) do
+        local node = self.nodes[nodeId]
+        info = info .. "{"
+        info = info .. node.status..","
+        if #node.outConnections > 0 then
+            for i=1,#node.outConnections do
+                info = info .. node.outConnections[i].status .. ","
+            end
+        end
+        info = string.sub(info,1,string.len(info)-1)
+        info = info .. "},"
+    end
+    info = string.sub(info,1,string.len(info)-1)
+    info = info .. "}"
+    return info
 end
 
 function BehaviourTree:load(fileName)
@@ -167,4 +188,30 @@ end
 function BehaviourTree:debug(info)
     if not self.agent.isBTDebug then return end
     print(info)
+end
+
+function BehaviourTree:addDebugger(tbSocket)
+    table.insert( self.debugList, tbSocket )
+    self.agent.isBTDebug = true
+end
+
+function BehaviourTree:delDebugger(tbSocket)
+    for i=1,#self.debugList do
+        if self.debugList[i] == tbSocket then
+            table.remove( self.debugList, i )
+        end
+    end
+    if #self.debugList > 0 then
+        self.agent.isBTDebug = false
+    end
+end
+
+function BehaviourTree:checkDebugger()
+    
+    if not self.agent.isBTDebug then return end
+    local info = self:getNodeInfo()
+    for i,socket in pairs(self.debugList) do
+        print("check debug:",i,info)
+        s2c.btInfo(socket,info)
+    end
 end

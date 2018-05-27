@@ -12,75 +12,31 @@
         },
         {
             "_action": {
-                "luaCls": {
-                    "_value": "ATestAction"
+                "waitTime": {
+                    "_value": 2.0
                 },
-                "luaArg1": {
-
-                },
-                "luaArg2": {
-
-                },
-                "luaArg3": {
-
-                },
-                "$type": "LuaAction"
+                "$type": "NodeCanvas.Tasks.Actions.Wait"
             },
             "_position": {
-                "x": 5501.0,
-                "y": 5250.0
+                "x": 5239.0,
+                "y": 5266.0
             },
             "$type": "NodeCanvas.BehaviourTrees.ActionNode",
             "$id": "3"
         },
         {
-            "_condition": {
-                "luaCls": {
-                    "_value": "CTestCondition"
+            "_action": {
+                "waitTime": {
+                    "_value": 4.0
                 },
-                "luaArg1": {
-
-                },
-                "luaArg2": {
-
-                },
-                "luaArg3": {
-
-                },
-                "$type": "LuaCondition"
+                "$type": "NodeCanvas.Tasks.Actions.Wait"
             },
             "_position": {
-                "x": 5652.0,
-                "y": 5250.0
+                "x": 5541.0,
+                "y": 5263.0
             },
-            "$type": "NodeCanvas.BehaviourTrees.ConditionNode",
-            "$id": "9"
-        },
-        {
-            "_condition": {
-                "timeout": {
-                    "_value": 1.0
-                },
-                "$type": "NodeCanvas.Tasks.Conditions.Timeout"
-            },
-            "_position": {
-                "x": 5173.0,
-                "y": 5252.0
-            },
-            "$type": "NodeCanvas.BehaviourTrees.ConditionNode"
-        },
-        {
-            "_subTree": {
-                "_value": 1
-            },
-            "_subTreeName": {
-                "_value": "sub_tree"
-            },
-            "_position": {
-                "x": 5347.0,
-                "y": 5244.0
-            },
-            "$type": "NodeCanvas.BehaviourTrees.SubTree"
+            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
+            "$id": "6"
         }
     ],
     "connections": [
@@ -98,7 +54,7 @@
                 "$ref": "2"
             },
             "_targetNode": {
-                "$ref": "9"
+                "$ref": "6"
             },
             "$type": "NodeCanvas.BehaviourTrees.BTConnection"
         }

@@ -182,3 +182,48 @@ protected override void OnGraphUpdate(){
     }
 }
 ```
+#### 十一：`Node`类的`status`属性的`set`接口改为`public`
+```csharp
+///The current status of the node
+public Status status{
+    get {return _status;}
+    set {_status = value;}
+}
+```
+#### 十二：`BehaviourTreeOwner`类增加`isRunOnServer`变量
+```csharp
+// Is run on game server
+public bool isRunOnServer
+{
+    get { return behaviour != null ? behaviour.isRunOnServer : true; }
+    set { if (behaviour != null) behaviour.isRunOnServer = value; }
+}
+```
+#### 十三：`BehaviourTreeOwnerInspector`增加`isRunOnServer`编辑
+```csharp
+protected override void OnExtraOptions(){
+    owner.repeat = EditorGUILayout.Toggle("Repeat", owner.repeat);
+    if (owner.repeat){
+        GUI.color = owner.updateInterval > 0? Color.white : new Color(1,1,1,0.5f);
+        owner.updateInterval = EditorGUILayout.FloatField("Update Interval", owner.updateInterval );
+        GUI.color = Color.white;
+    }
+    owner.isRunOnServer = EditorGUILayout.Toggle("RunOnServer", owner.isRunOnServer);//new add
+}
+```
+#### 十四：`BehaviourTreeOwner`类增加`UpdateNodeStatus`和`UpdateNodeConnectionStatus`接口
+```csharp
+public void UpdateNodeStatus(int nodeIndex,int status)
+{
+    if (behaviour == null) return;
+    Node node = behaviour.allNodes[nodeIndex];
+    node.status = (Status)status;
+}
+
+public void UpdateNodeConnectionStatus(int nodeIndex, int connectionIndex,int status)
+{
+    if (behaviour == null) return;
+    Node node = behaviour.allNodes[nodeIndex];
+    node.outConnections[connectionIndex].status = (Status)status;
+}
+```

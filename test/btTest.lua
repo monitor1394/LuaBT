@@ -12,11 +12,11 @@ end
 includePath()
 require("btHeader")
 require("aiHeader")
-require("aiMgr")
 require("lib.driver")
 
 local btree = bt.BehaviourTree.new()
 btree:load("test")
+btree:start()
 
 local function updateBT()
     bt.time = bt.time + bt.deltaTime
