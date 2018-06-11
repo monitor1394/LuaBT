@@ -1,14 +1,64 @@
 {
     "version": 2.7,
     "type": "NodeCanvas.BehaviourTrees.BehaviourTree",
+    "translation": {
+        "x": -5001.0,
+        "y": -5001.0
+    },
     "nodes": [
         {
             "_position": {
-                "x": 5359.0,
-                "y": 5128.0
+                "x": 5369.0,
+                "y": 5198.0
             },
             "$type": "NodeCanvas.BehaviourTrees.Sequencer",
             "$id": "2"
+        },
+        {
+            "_condition": {
+                "luaCls": {
+                    "_value": "CTest"
+                },
+                "luaArg1": {
+
+                },
+                "luaArg2": {
+
+                },
+                "luaArg3": {
+
+                },
+                "$type": "LuaCondition"
+            },
+            "_position": {
+                "x": 5213.0,
+                "y": 5306.0
+            },
+            "$type": "NodeCanvas.BehaviourTrees.ConditionNode",
+            "$id": "3"
+        },
+        {
+            "_action": {
+                "luaCls": {
+                    "_value": "ATest"
+                },
+                "luaArg1": {
+
+                },
+                "luaArg2": {
+
+                },
+                "luaArg3": {
+
+                },
+                "$type": "LuaAction"
+            },
+            "_position": {
+                "x": 5370.0,
+                "y": 5304.0
+            },
+            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
+            "$id": "9"
         },
         {
             "_action": {
@@ -18,25 +68,11 @@
                 "$type": "NodeCanvas.Tasks.Actions.Wait"
             },
             "_position": {
-                "x": 5239.0,
-                "y": 5266.0
+                "x": 5523.0,
+                "y": 5305.0
             },
             "$type": "NodeCanvas.BehaviourTrees.ActionNode",
-            "$id": "3"
-        },
-        {
-            "_action": {
-                "waitTime": {
-                    "_value": 4.0
-                },
-                "$type": "NodeCanvas.Tasks.Actions.Wait"
-            },
-            "_position": {
-                "x": 5541.0,
-                "y": 5263.0
-            },
-            "$type": "NodeCanvas.BehaviourTrees.ActionNode",
-            "$id": "6"
+            "$id": "15"
         }
     ],
     "connections": [
@@ -54,7 +90,16 @@
                 "$ref": "2"
             },
             "_targetNode": {
-                "$ref": "6"
+                "$ref": "9"
+            },
+            "$type": "NodeCanvas.BehaviourTrees.BTConnection"
+        },
+        {
+            "_sourceNode": {
+                "$ref": "2"
+            },
+            "_targetNode": {
+                "$ref": "15"
             },
             "$type": "NodeCanvas.BehaviourTrees.BTConnection"
         }

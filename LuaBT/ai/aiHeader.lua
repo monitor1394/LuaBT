@@ -1,3 +1,4 @@
-require "ai.actions.ATestAction"
+require "ai.namespace"
+require "ai.actions.ATest"
 
-require "ai.conditions.CTestCondition"
+require "ai.conditions.CTest"

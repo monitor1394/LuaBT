@@ -13,6 +13,8 @@ includePath()
 require("bt.btHeader")
 require("ai.aiHeader")
 require("lib.driver")
+require("ai.api.server.APIAction")
+require("ai.api.server.APICondition")
 
 local btree = bt.BehaviourTree.new()
 btree:load("test")

@@ -172,8 +172,8 @@ namespace ParadoxNotion.Design{
         public static string[] GetFileList(bool isAction)
         {
             string dir = "";
-            if (isAction) dir = "C:/work/project/LuaBT/test/ai/actions";
-            else dir = "C:/work/project/LuaBT/test/ai/conditions";
+            if (isAction) dir = "C:/work/project/LuaBT/LuaBT/ai/actions";
+            else dir = "C:/work/project/LuaBT/LuaBT/ai/conditions";
             var files = Directory.GetFiles(dir, "*.lua");
             List<string> fileList = new List<string>();
             fileList.Add("None");
