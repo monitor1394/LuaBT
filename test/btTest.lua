@@ -1,7 +1,7 @@
 local function includePath()
     local paths = {
-        "/LuaBT/?.lua",
-        "../XGame/XCommon/lua/?.lua",
+        "../LuaBT/?.lua",
+        "../../XGame/XCommon/lua/?.lua",
     }
     for k,path in pairs(paths) do
         package.path = package.path .. ";" .. path
@@ -14,6 +14,9 @@ require("ai.aiHeader")
 require("lib.driver")
 require("ai.api.server.APIAction")
 require("ai.api.server.APICondition")
+
+bt.ASSERT_DIR       = ""
+bt.ASSERT_SUFFIX    = ".BT"
 
 local btree = bt.BehaviourTree.new()
 btree:load("test")
